@@ -62,32 +62,44 @@ export default function MainPage() {
                   {zeni.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                 </strong>
               </p>
-              <div
-                className="input-container"
-              >
-                <input
-                  type="number"
-                  className="input"
-                  min={0}
-                  max={1000000}
-                  onChange={(event) => handleChange(event)}
-                />
-                <button
-                  className="add-money"
-                  type="button"
-                  onClick={buyZeni}
-                >
-                  Add Money
-                </button>
-              </div>
+              {
+                zeni < 10000
+                  ? (
+                    <strong
+                      className="message"
+                    >
+                      LOW MONEY
+                    </strong>
+                  )
+                  : ''
+              }
             </div>
           )
           : (
             <p>
-              You don&apos;t have more money.
+              You don&apos;t have more money Add some now!
             </p>
           )
       }
+      <div
+        className="input-container"
+      >
+        <input
+          type="number"
+          className="input"
+          min={0}
+          max={1000000}
+          step={100}
+          onChange={(event) => handleChange(event)}
+        />
+        <button
+          className="add-money"
+          type="button"
+          onClick={buyZeni}
+        >
+          Add Money
+        </button>
+      </div>
       {
         pocketValue === 0
           ? (
