@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import Pokemon from '../interfaces/Pokemon';
 
@@ -8,6 +8,7 @@ export default function MainPage() {
   const [pocket, setPocket] = useState<Pokemon[]>([]);
   const [pocketValue, setPocketValue] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
+  const [addition, setAddition] = useState<number>(0);
 
   function api(url: string) {
     return fetch(url)
@@ -40,18 +41,46 @@ export default function MainPage() {
     }
   }
 
+  function buyZeni() {
+    setZeni((prevZeni) => prevZeni + addition);
+  }
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setAddition(parseInt(event.target.value, 10));
+  }
+
   return (
     <>
       <h1>Welcome to Janos&apos; Pokemon Shop</h1>
       {
         zeni > 0
           ? (
-            <p>
-              Currently you have&nbsp;
-              <strong>
-                {zeni.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-              </strong>
-            </p>
+            <div>
+              <p>
+                Currently you have&nbsp;
+                <strong>
+                  {zeni.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                </strong>
+              </p>
+              <div
+                className="input-container"
+              >
+                <input
+                  type="number"
+                  className="input"
+                  min={0}
+                  max={1000000}
+                  onChange={(event) => handleChange(event)}
+                />
+                <button
+                  className="add-money"
+                  type="button"
+                  onClick={buyZeni}
+                >
+                  Add Money
+                </button>
+              </div>
+            </div>
           )
           : (
             <p>
