@@ -1,0 +1,86 @@
+body {
+    text-align: center;
+    background-image: url("../../public/images/background.webp");
+    background-position: top;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    border-radius: 25px;
+    text-shadow: rgba(20, 147, 161, 0.3);
+    text-indent: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.add-money {
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: rgb(93, 29, 241);
+    color: whitesmoke;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.card {
+    border: 5px solid rgb(0, 153, 255);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width: 200px;
+    background-color: rgba(188, 224, 228, 0.3);
+}
+
+.pokemon-name {
+    color: rgb(40, 52, 174);
+    font-size: larger;
+}
+
+.button {
+    background-color: chartreuse;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.message {
+    color: red;
+}
+
+/*responsive styling*/
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 100%;
+        margin-bottom: 20px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        display: block;
+        margin-left: 20%;
+    }
+}
