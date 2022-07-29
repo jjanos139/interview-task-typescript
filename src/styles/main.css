@@ -29,7 +29,7 @@ body {
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
+    grid-gap: 0.1rem;
     width: 90%;
     margin-left: 5%;
 }
@@ -51,10 +51,36 @@ body {
     font-size: larger;
 }
 
+.price {
+    font-weight: bold;
+    color: orangered;
+    margin: 5px;
+}
+
+.sale {
+    font-weight: bold;
+    animation: blinker 5s linear infinite;
+    color: magenta;
+    text-decoration: line-through;
+    margin: 5px;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.stats {
+    margin: 5px;
+    font-weight: bolder;
+}
+
 .button {
     background-color: chartreuse;
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 1.2em;
     cursor: pointer;
 }
