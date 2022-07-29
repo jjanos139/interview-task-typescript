@@ -13,8 +13,8 @@ export default function MainPage() {
   const [addition, setAddition] = useState<number>(0);
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>(pokemons);
 
-  function api(url: string) {
-    return fetch(url)
+  function api(url: string, options: { signal: AbortSignal }) {
+    return fetch(url, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -24,13 +24,20 @@ export default function MainPage() {
   }
 
   useEffect(() => {
+    const controller = new AbortController();
+
     function getPokemonDetails(url: string) {
-      api(url).then((item) => setPokemons((prevState) => [...prevState, item]));
+      api(url, {
+        signal: controller.signal,
+      }).then((item) => setPokemons((prevState) => [...prevState, item]));
     }
-    api('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
+    api('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0', { signal: controller.signal })
       .then((data) => {
         data.results.map((elem: { url: string }) => getPokemonDetails(elem.url));
       });
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {
