@@ -11,6 +11,7 @@ export default function MainPage() {
   const [pocketValue, setPocketValue] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
   const [addition, setAddition] = useState<number>(0);
+  const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>(pokemons);
 
   function api(url: string) {
     return fetch(url)
@@ -32,6 +33,10 @@ export default function MainPage() {
       });
   }, []);
 
+  useEffect(() => {
+    setFilteredPokemon(pokemons);
+  }, [pokemons]);
+
   return (
     <>
       <Top
@@ -42,16 +47,29 @@ export default function MainPage() {
         pocketValue={pocketValue}
         pocket={pocket}
         message={message}
-      />
-      <Card
-        zeni={zeni}
         pokemons={pokemons}
-        changeZeni={setZeni}
-        changePocketValue={setPocketValue}
-        pocket={pocket}
-        changePocket={setPocket}
-        changeMessage={setMessage}
+        changeFilteredPokemons={setFilteredPokemon}
       />
+      {filteredPokemon.length
+        ? (
+          <Card
+            zeni={zeni}
+            pokemons={filteredPokemon}
+            changeZeni={setZeni}
+            changePocketValue={setPocketValue}
+            pocket={pocket}
+            changePocket={setPocket}
+            changeMessage={setMessage}
+          />
+        )
+        : (
+          <p
+            className="message"
+          >
+            There is no pokemon with that name!
+            Please try searching for something else.
+          </p>
+        )}
     </>
   );
 }

@@ -1,10 +1,12 @@
 import { ChangeEvent } from 'react';
 
+import Pokemon from '../interfaces/Pokemon';
 import TopProps from '../interfaces/TopProps';
 
 export default function Top(props: TopProps) {
   const {
-    zeni, addition, updateAddition, changeZeni, pocketValue, pocket, message,
+    zeni, addition, updateAddition, changeZeni, pocketValue,
+    pocket, message, pokemons, changeFilteredPokemons,
   } = props;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -13,6 +15,13 @@ export default function Top(props: TopProps) {
 
   function buyZeni() {
     changeZeni((prevZeni) => prevZeni + addition);
+  }
+
+  function filter(event: ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value.toLowerCase();
+    let result: Pokemon[] = [];
+    result = pokemons.filter((item) => item.name.toLowerCase().search(value) !== -1);
+    setTimeout(() => changeFilteredPokemons(result), 1000);
   }
 
   return (
@@ -94,6 +103,14 @@ export default function Top(props: TopProps) {
                     </div>
                   )
             }
+      <div>
+        <input
+          type="text"
+          placeholder="filter"
+          onChange={(event) => filter(event)}
+          className="input"
+        />
+      </div>
     </>
   );
 }

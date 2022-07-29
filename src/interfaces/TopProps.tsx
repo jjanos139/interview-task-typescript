@@ -9,5 +9,7 @@ export default interface TopProps {
   changeZeni: Dispatch<SetStateAction<number>>,
   pocketValue: number,
   pocket: Pokemon[],
-  message: string
+  message: string,
+  pokemons: Pokemon[],
+  changeFilteredPokemons: Dispatch<SetStateAction<Pokemon[]>>
 }
