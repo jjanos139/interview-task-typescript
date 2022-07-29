@@ -54,19 +54,28 @@ export default function Card(props: CardProps) {
           <p
             className="stats"
           >
-            Attack&nbsp;-&nbsp;
+            <i
+              className="fa-solid fa-bolt-lightning"
+            />
+            &nbsp;-&nbsp;
             {i.stats[1].base_stat}
           </p>
           <p
             className="stats"
           >
-            Defence&nbsp;-&nbsp;
+            <i
+              className="fa-solid fa-shield-halved"
+            />
+            &nbsp;-&nbsp;
             {i.stats[2].base_stat}
           </p>
           <p
             className="stats"
           >
-            Speed&nbsp;-&nbsp;
+            <i
+              className="fa-solid fa-gauge-high"
+            />
+            &nbsp;-&nbsp;
             {i.stats[5].base_stat}
           </p>
           <button
