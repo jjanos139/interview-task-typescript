@@ -9,15 +9,15 @@ export default function Top(props: TopProps) {
     pocket, message, pokemons, changeFilteredPokemons,
   } = props;
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     updateAddition(parseInt(event.target.value, 10));
   }
 
-  function buyZeni() {
+  function buyZeni(): void {
     changeZeni((prevZeni) => prevZeni + addition);
   }
 
-  function filter(event: ChangeEvent<HTMLInputElement>) {
+  function filter(event: ChangeEvent<HTMLInputElement>): void {
     const value = event.target.value.toLowerCase();
     let result: Pokemon[] = [];
     result = pokemons.filter((item) => item.name.toLowerCase().search(value) !== -1);
@@ -28,34 +28,34 @@ export default function Top(props: TopProps) {
     <>
       <h1>Welcome to Janos&apos; Pokemon Shop</h1>
       {
-                zeni > 0
+        zeni > 0
+          ? (
+            <div>
+              <p>
+                Currently you have&nbsp;
+                <strong>
+                  {zeni.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                </strong>
+              </p>
+              {
+                zeni < 10000
                   ? (
-                    <div>
-                      <p>
-                        Currently you have&nbsp;
-                        <strong>
-                          {zeni.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                        </strong>
-                      </p>
-                      {
-                                zeni < 10000
-                                  ? (
-                                    <strong
-                                      className="message"
-                                    >
-                                      LOW MONEY
-                                    </strong>
-                                  )
-                                  : ''
-                            }
-                    </div>
+                    <strong
+                      className="message"
+                    >
+                      LOW MONEY
+                    </strong>
                   )
-                  : (
-                    <p>
-                      You don&apos;t have more money. Add some now!
-                    </p>
-                  )
-            }
+                  : ''
+              }
+            </div>
+          )
+          : (
+            <p>
+              You don&apos;t have more money. Add some now!
+            </p>
+          )
+      }
       <div
         className="input-container"
       >
@@ -77,32 +77,32 @@ export default function Top(props: TopProps) {
         </button>
       </div>
       {
-                pocketValue === 0
-                  ? (
-                    <h3>
-                      Your pocket is empty.
-                    </h3>
-                  )
-                  : (
-                    <div>
-                      <h3>
-                        Pocket value:&nbsp;
-                        {pocketValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                      </h3>
-                      <h3>
-                        Your pocket contains these Pokemon:&nbsp;
-                        {pocket.map((item) => item.name.charAt(0)
-                          .toUpperCase() + item.name.substring(1).toLowerCase())
-                          .join(', ')}
-                      </h3>
-                      <h3
-                        className="message"
-                      >
-                        {message}
-                      </h3>
-                    </div>
-                  )
-            }
+        pocketValue === 0
+          ? (
+            <h3>
+              Your pocket is empty.
+            </h3>
+          )
+          : (
+            <div>
+              <h3>
+                Pocket value:&nbsp;
+                {pocketValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              </h3>
+              <h3>
+                Your pocket contains these Pokemon:&nbsp;
+                {pocket.map((item) => item.name.charAt(0)
+                  .toUpperCase() + item.name.substring(1).toLowerCase())
+                  .join(', ')}
+              </h3>
+              <h3
+                className="message"
+              >
+                {message}
+              </h3>
+            </div>
+          )
+      }
       <div>
         <input
           type="text"

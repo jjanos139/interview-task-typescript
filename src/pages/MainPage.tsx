@@ -26,7 +26,7 @@ export default function MainPage() {
   useEffect(() => {
     const controller = new AbortController();
 
-    function getPokemonDetails(url: string) {
+    function getPokemonDetails(url: string): void {
       api(url, {
         signal: controller.signal,
       }).then((item) => setPokemons((prevState) => [...prevState, item]));
